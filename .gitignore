@@ -1,0 +1,7 @@
+*.out
+**/bin
+**/obj
+*.o
+*.depend
+*.layout
+*.py
