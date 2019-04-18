@@ -150,10 +150,11 @@ protected:
 			Option("help", "h", "display help information on command line arguments")
 				.required(false)
 				.repeatable(false));
-        options.addOption(
+       		 options.addOption(
 			Option("config", "c", "use config.ini file instead of default params")
 				.required(false)
-				.repeatable(false));
+				.repeatable(false)
+				.argument("directory",false));
 	}
 
 	void handleOption(const std::string& name, const std::string& value)
@@ -162,8 +163,10 @@ protected:
 
 		if (name == "help")
 			_helpRequested = true;
-        if (name == "config")
-            _loadConfig = true;
+		if (name == "config"){
+           		 _loadConfig = true;
+            		 config_path = value;
+           	 }
 	}
 
 	void displayHelp()
@@ -182,9 +185,8 @@ protected:
 			displayHelp();
 		}
 		else
-		{
-			// get parameters from configuration file
-			if (_loadConfig)loadConfiguration("config.ini");
+		{			// get parameters from configuration file
+			if (_loadConfig)loadConfiguration(config_path);
 			unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port",9980);
 			std::string format(config().getString("HTTPTimeServer.format", DateTimeFormat::SORTABLE_FORMAT));
 			int maxQueued  = config().getInt("HTTPTimeServer.maxQueued", 100);
@@ -212,6 +214,7 @@ protected:
 private:
 	bool _helpRequested;
 	bool _loadConfig;
+	std ::string config_path;
 };
 
 
