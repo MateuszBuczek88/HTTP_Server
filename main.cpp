@@ -178,7 +178,8 @@ protected:
 		else
 		{
 			// get parameters from configuration file
-			unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port", 9980);
+			loadConfiguration("config.ini");
+			unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port");
 			std::string format(config().getString("HTTPTimeServer.format", DateTimeFormat::SORTABLE_FORMAT));
 			int maxQueued  = config().getInt("HTTPTimeServer.maxQueued", 100);
 			int maxThreads = config().getInt("HTTPTimeServer.maxThreads", 16);
