@@ -1,5 +1,5 @@
-#ifndef TIMEREQUESTHANDLERFACTORY_H
-#define TIMEREQUESTHANDLERFACTORY_H
+#ifndef TIMEREQUESTHANDLER_H
+#define TIMEREQUESTHANDLER_H
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "Poco/Net/HTTPRequestHandlerFactory.h"
@@ -61,4 +61,4 @@ private:
 	std::string _format;
 };
 
-#endif // TIMEREQUESTHANDLERFACTORY_H
+#endif // TIMEREQUESTHANDLER_H
