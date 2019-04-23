@@ -30,6 +30,7 @@
 #include "TimeRequestHandler.h"
 #include "HelloWorldRequestHandler.h"
 #include "RandomCatRequestHandler.h"
+#include "TimeRequestHandlerFactory.h"
 #include <iostream>
 
 
@@ -49,31 +50,6 @@ using Poco::Util::Application;
 using Poco::Util::Option;
 using Poco::Util::OptionSet;
 using Poco::Util::HelpFormatter;
-
-
-class TimeRequestHandlerFactory: public HTTPRequestHandlerFactory
-{
-public:
-	TimeRequestHandlerFactory(const std::string& format):
-		_format(format)
-	{
-	}
-
-	HTTPRequestHandler* createRequestHandler(const HTTPServerRequest& request)
-	{
-		if (request.getURI() == "/")
-			return new TimeRequestHandler(_format);
-        else if (request.getURI() == "/hello")
-			return new HelloWorldRequestHandler(_format);
-        else if (request.getURI() == "/cat")
-			return new RandomCatRequestHandler(_format);
-		else
-			return 0;
-	}
-
-private:
-	std::string _format;
-};
 
 
 class HTTPTimeServer: public Poco::Util::ServerApplication
