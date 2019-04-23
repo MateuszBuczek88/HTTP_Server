@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add library="PocoUtil" />
@@ -28,6 +29,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -38,7 +40,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/HelloWorldRequestHandler.h" />
+		<Unit filename="include/RandomCatRequestHandler.h" />
+		<Unit filename="include/TimeRequestHandlerFactory.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/HelloWorldRequestHandler.cpp" />
+		<Unit filename="src/RandomCatRequestHandler.cpp" />
+		<Unit filename="src/TimeRequestHandlerFactory.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

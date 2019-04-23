@@ -27,6 +27,9 @@
 #include "Poco/Util/Option.h"
 #include "Poco/Util/OptionSet.h"
 #include "Poco/Util/HelpFormatter.h"
+#include "TimeRequestHandlerFactory.h"
+#include "HelloWorldRequestHandler.h"
+#include "RandomCatRequestHandler.h"
 #include <iostream>
 
 
@@ -48,39 +51,6 @@ using Poco::Util::OptionSet;
 using Poco::Util::HelpFormatter;
 
 
-class TimeRequestHandler: public HTTPRequestHandler
-	/// Return a HTML document with the current date and time.
-{
-public:
-	TimeRequestHandler(const std::string& format):
-		_format(format)
-	{
-	}
-
-	void handleRequest(HTTPServerRequest& request, HTTPServerResponse& response)
-	{
-		Application& app = Application::instance();
-		app.logger().information("Request from " + request.clientAddress().toString());
-
-		Timestamp now;
-		std::string dt(DateTimeFormatter::format(now, _format));
-
-		response.setChunkedTransferEncoding(true);
-		response.setContentType("text/html");
-
-		std::ostream& ostr = response.send();
-		ostr << "<html><head><title>HTTPTimeServer powered by POCO C++ Libraries</title>";
-		ostr << "<meta http-equiv=\"refresh\" content=\"1\"></head>";
-		ostr << "<body><p style=\"text-align: center; font-size: 48px;\">";
-		ostr << dt;
-		ostr << "</p></body></html>";
-	}
-
-private:
-	std::string _format;
-};
-
-
 class TimeRequestHandlerFactory: public HTTPRequestHandlerFactory
 {
 public:
@@ -93,6 +63,10 @@ public:
 	{
 		if (request.getURI() == "/")
 			return new TimeRequestHandler(_format);
+        else if (request.getURI() == "/hello")
+			return new HelloWorldRequestHandler(_format);
+        else if (request.getURI() == "/cat")
+			return new RandomCatRequestHandler(_format);
 		else
 			return 0;
 	}
