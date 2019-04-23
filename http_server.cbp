@@ -42,10 +42,12 @@
 		</Compiler>
 		<Unit filename="include/HelloWorldRequestHandler.h" />
 		<Unit filename="include/RandomCatRequestHandler.h" />
+		<Unit filename="include/TimeRequestHandler.h" />
 		<Unit filename="include/TimeRequestHandlerFactory.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/HelloWorldRequestHandler.cpp" />
 		<Unit filename="src/RandomCatRequestHandler.cpp" />
+		<Unit filename="src/TimeRequestHandler.cpp" />
 		<Unit filename="src/TimeRequestHandlerFactory.cpp" />
 		<Extensions>
 			<code_completion />
