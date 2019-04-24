@@ -137,13 +137,13 @@ protected:
 		{
 			if ( ! config_path.empty () ) {
 				logger().information("Loading configuration file. Path: "+config_path);
-					try {
-						loadConfiguration(config_path);
-						logger().information("Config file " + config_path + " successfully loaded");
-					}
-					catch (const Poco::InvalidArgumentException & e) {
-						logger().fatal("Failed to load "+config_path);
-					}
+				try {
+					loadConfiguration(config_path);
+					logger().information("Config file " + config_path + " successfully loaded");
+				}
+				catch (const Poco::InvalidArgumentException & e) {
+					logger().fatal("Failed to load "+config_path);
+				}
 			}
 
 			unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port",9980);
