@@ -72,7 +72,7 @@ class HTTPTimeServer: public Poco::Util::ServerApplication
 	/// To test the TimeServer you can use any web browser (http://localhost:9980/).
 {
 public:
-	HTTPTimeServer(): _helpRequested(false), _loadConfig(false)
+	HTTPTimeServer(): _helpRequested(false)
 	{
 	}
 
@@ -114,7 +114,6 @@ protected:
 		if (name == "help")
 			_helpRequested = true;
 		if (name == "config"){
-           		 _loadConfig = true;
             		 config_path = value;
            	 }
 	}
@@ -136,7 +135,7 @@ protected:
 		}
 		else
 		{			// get parameters from configuration file
-			if (_loadConfig)loadConfiguration(config_path);
+			if (!config_path.empty())loadConfiguration(config_path);
 			unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port",9980);
 			std::string format(config().getString("HTTPTimeServer.format", DateTimeFormat::SORTABLE_FORMAT));
 			int maxQueued  = config().getInt("HTTPTimeServer.maxQueued", 100);
@@ -163,7 +162,6 @@ protected:
 
 private:
 	bool _helpRequested;
-	bool _loadConfig;
 	std ::string config_path;
 };
 
