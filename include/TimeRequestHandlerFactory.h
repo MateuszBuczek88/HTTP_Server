@@ -44,11 +44,7 @@ using Poco::Util::HelpFormatter;
 class TimeRequestHandlerFactory: public HTTPRequestHandlerFactory
 {
 public:
-	TimeRequestHandlerFactory(const std::string& format):
-		_format(format)
-	{
-	}
-
+	TimeRequestHandlerFactory(const std::string& format);
 	HTTPRequestHandler* createRequestHandler(const HTTPServerRequest& request);
 
 private:
