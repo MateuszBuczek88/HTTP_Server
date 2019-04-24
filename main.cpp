@@ -143,7 +143,7 @@ protected:
                 }
                catch (const Poco::InvalidArgumentException & e) {
 
-                    logger().fatal("Loading error");
+                    logger().fatal("Failed to load "+config_path);
                 }
 			}
 			unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port",9980);
