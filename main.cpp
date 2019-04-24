@@ -135,7 +135,17 @@ protected:
 		}
 		else
 		{			// get parameters from configuration file
-			if (!config_path.empty())loadConfiguration(config_path);
+			if ( ! config_path.empty () ) {
+                logger().information("Loading configuration file. Path: "+config_path);
+               try {
+                loadConfiguration(config_path);
+                logger().information("Loading succes");
+                }
+               catch (const Poco::InvalidArgumentException & e) {
+
+                    logger().fatal("Loading error");
+                }
+			}
 			unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port",9980);
 			std::string format(config().getString("HTTPTimeServer.format", DateTimeFormat::SORTABLE_FORMAT));
 			int maxQueued  = config().getInt("HTTPTimeServer.maxQueued", 100);
