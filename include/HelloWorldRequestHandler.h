@@ -42,9 +42,6 @@ public:
 		Application& app = Application::instance();
 		app.logger().information("Request from " + request.clientAddress().toString());
 
-		Timestamp now;
-		std::string dt(DateTimeFormatter::format(now, _format));
-
 		response.setChunkedTransferEncoding(true);
 		response.setContentType("text/html");
 
@@ -55,9 +52,6 @@ public:
 		ostr << "Hello World";
 		ostr << "</p></body></html>";
 	}
-
-private:
-	std::string _format;
 };
 
 #endif // HELLOWORLDREQUESTHANDLER_H
