@@ -1,12 +1,17 @@
 #include "TimeRequestHandlerFactory.h"
 
 HTTPRequestHandler* TimeRequestHandlerFactory::createRequestHandler(const HTTPServerRequest& request) {
+
+if(request.getMethod() == "GET"){
 if (request.getURI() == "/")
     return new TimeRequestHandler (_format);
 else if (request.getURI() == "/hello")
-    return new HelloWorldRequestHandler (_format);
+    return new HelloWorldRequestHandler ();
 else if (request.getURI() == "/cat")
-    return new RandomCatRequestHandler (_format);
+    return new RandomCatRequestHandler ();
 else
-    return 0;
+    return nullptr;
+}
+else
+    return nullptr;
 }

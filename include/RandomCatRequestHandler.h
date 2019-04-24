@@ -32,8 +32,7 @@ class RandomCatRequestHandler: public HTTPRequestHandler
 	/// Return a HTML document with the current date and time.
 {
 public:
-	RandomCatRequestHandler(const std::string& format):
-		_format(format)
+	RandomCatRequestHandler()
 	{
 	}
 

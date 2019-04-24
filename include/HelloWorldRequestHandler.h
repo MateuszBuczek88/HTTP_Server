@@ -33,8 +33,7 @@ class HelloWorldRequestHandler: public HTTPRequestHandler
 	/// Return a HTML document with the current date and time.
 {
 public:
-	HelloWorldRequestHandler(const std::string& format):
-		_format(format)
+	HelloWorldRequestHandler()
 	{
 	}
 
