@@ -1,12 +1,12 @@
-#ifndef HELLOWORLDREQUESTHANDLER_H
-#define HELLOWORLDREQUESTHANDLER_H
+#ifndef INCLUDE_HELLOWORLDREQUESTHANDLER_H_
+#define INCLUDE_HELLOWORLDREQUESTHANDLER_H_
+#include <iostream>
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "Poco/Net/HTTPRequestHandlerFactory.h"
 #include "Poco/Net/HTTPServerParams.h"
 #include "Poco/Net/HTTPServerRequest.h"
 #include "Poco/Net/HTTPServerResponse.h"
-#include "Poco/Net/HTTPServerParams.h"
 #include "Poco/Net/ServerSocket.h"
 #include "Poco/Timestamp.h"
 #include "Poco/DateTimeFormatter.h"
@@ -17,7 +17,6 @@
 #include "Poco/Util/Option.h"
 #include "Poco/Util/OptionSet.h"
 #include "Poco/Util/HelpFormatter.h"
-#include <iostream>
 
 using Poco::Net::HTTPRequestHandler;
 using Poco::Net::HTTPServer;
@@ -29,29 +28,12 @@ using Poco::Util::Application;
 using Poco::Timestamp;
 using Poco::DateTimeFormatter;
 
-class HelloWorldRequestHandler: public HTTPRequestHandler
-	/// Return a HTML document with the current date and time.
-{
-public:
-	HelloWorldRequestHandler()
-	{
-	}
-
-	void handleRequest(HTTPServerRequest& request, HTTPServerResponse& response)
-	{
-		Application& app = Application::instance();
-		app.logger().information("Request from " + request.clientAddress().toString());
-
-		response.setChunkedTransferEncoding(true);
-		response.setContentType("text/html");
-
-		std::ostream& ostr = response.send();
-		ostr << "<html><head><title>HTTPTimeServer powered by POCO C++ Libraries</title>";
-		ostr << "<meta http-equiv=\"refresh\" content=\"1\"></head>";
-		ostr << "<body><p style=\"text-align: center; font-size: 48px;\">";
-		ostr << "Hello World";
-		ostr << "</p></body></html>";
-	}
+class HelloWorldRequestHandler: public HTTPRequestHandler {
+ public:
+    HelloWorldRequestHandler();
+    void handleRequest(
+        HTTPServerRequest& request,
+        HTTPServerResponse& response);
 };
 
-#endif // HELLOWORLDREQUESTHANDLER_H
+#endif  // INCLUDE_HELLOWORLDREQUESTHANDLER_H_

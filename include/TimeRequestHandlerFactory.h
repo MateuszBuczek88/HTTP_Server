@@ -1,10 +1,10 @@
-#ifndef TIMEREQUESTHANDLERFACTORY_H
-#define TIMEREQUESTHANDLERFACTORY_H
-
+#ifndef INCLUDE_TIMEREQUESTHANDLERFACTORY_H_
+#define INCLUDE_TIMEREQUESTHANDLERFACTORY_H_
+#include <iostream>
+#include <string>
 #include "Poco/Net/HTTPServer.h"
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "Poco/Net/HTTPRequestHandlerFactory.h"
-#include "Poco/Net/HTTPServerParams.h"
 #include "Poco/Net/HTTPServerRequest.h"
 #include "Poco/Net/HTTPServerResponse.h"
 #include "Poco/Net/HTTPServerParams.h"
@@ -22,7 +22,6 @@
 #include "HelloWorldRequestHandler.h"
 #include "RandomCatRequestHandler.h"
 #include "TimeRequestHandlerFactory.h"
-#include <iostream>
 
 using Poco::Net::ServerSocket;
 using Poco::Net::HTTPRequestHandler;
@@ -41,18 +40,13 @@ using Poco::Util::Option;
 using Poco::Util::OptionSet;
 using Poco::Util::HelpFormatter;
 
-class TimeRequestHandlerFactory: public HTTPRequestHandlerFactory
-{
-public:
-	TimeRequestHandlerFactory(const std::string& format):
-		_format(format)
-	{
-	}
+class TimeRequestHandlerFactory: public HTTPRequestHandlerFactory {
+ public:
+    explicit TimeRequestHandlerFactory(const std::string& format);
+    HTTPRequestHandler* createRequestHandler(const HTTPServerRequest& request);
 
-	HTTPRequestHandler* createRequestHandler(const HTTPServerRequest& request);
-
-private:
-	std::string _format;
+ private:
+    std::string _format;
 };
 
-#endif // TIMEREQUESTHANDLERFACTORY_H
+#endif  // INCLUDE_TIMEREQUESTHANDLERFACTORY_H_
