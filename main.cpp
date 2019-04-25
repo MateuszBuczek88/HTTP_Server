@@ -89,36 +89,36 @@ class HTTPTimeServer: public Poco::Util::ServerApplication {
         if (_helpRequested) {
             displayHelp();
         } else {
-                if (!config_path.empty()) {
-                    logger().information("Loading configuration file. Path: "+config_path);
-                    try {
-                        loadConfiguration(config_path);
-                        logger().information("Config file " + config_path + " successfully loaded");
+            if (!config_path.empty()) {
+                logger().information("Loading configuration file. Path: "+config_path);
+                try {
+                    loadConfiguration(config_path);
+                    logger().information("Config file " + config_path + " successfully loaded");
                     }
-                    catch (const Poco::InvalidArgumentException & e) {
-                        logger().fatal("Failed to load "+config_path);
-                    }
+                catch (const Poco::InvalidArgumentException & e) {
+                    logger().fatal("Failed to load "+config_path);
                 }
+            }
 
-                unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port" , 9980);
-                std::string format(config().getString("HTTPTimeServer.format", DateTimeFormat::SORTABLE_FORMAT));
-                int maxQueued  = config().getInt("HTTPTimeServer.maxQueued", 100);
-                int maxThreads = config().getInt("HTTPTimeServer.maxThreads", 16);
-                ThreadPool::defaultPool().addCapacity(maxThreads);
+            unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port" , 9980);
+            std::string format(config().getString("HTTPTimeServer.format", DateTimeFormat::SORTABLE_FORMAT));
+            int maxQueued  = config().getInt("HTTPTimeServer.maxQueued", 100);
+            int maxThreads = config().getInt("HTTPTimeServer.maxThreads", 16);
+            ThreadPool::defaultPool().addCapacity(maxThreads);
 
-                HTTPServerParams* pParams = new HTTPServerParams;
-                pParams->setMaxQueued(maxQueued);
-                pParams->setMaxThreads(maxThreads);
+            HTTPServerParams* pParams = new HTTPServerParams;
+            pParams->setMaxQueued(maxQueued);
+            pParams->setMaxThreads(maxThreads);
 
-                ServerSocket svs(port);
+            ServerSocket svs(port);
 
-                HTTPServer srv(new TimeRequestHandlerFactory(format), svs, pParams);
+            HTTPServer srv(new TimeRequestHandlerFactory(format), svs, pParams);
 
-                srv.start();
+            srv.start();
 
-                waitForTerminationRequest();
+            waitForTerminationRequest();
 
-                srv.stop();
+            srv.stop();
         }
         return Application::EXIT_OK;
     }
