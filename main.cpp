@@ -15,10 +15,14 @@
 #include "Poco/Util/Option.h"
 #include "Poco/Util/OptionSet.h"
 #include "Poco/Util/HelpFormatter.h"
+#include "Poco/Data/MySQL/Connector.h"
+#include "Poco/Data/Session.h"
+#include "Poco/Data/Statement.h"
 #include "TimeRequestHandler.h"
 #include "HelloWorldRequestHandler.h"
 #include "RandomCatRequestHandler.h"
 #include "TimeRequestHandlerFactory.h"
+#include "MySQLRequestHandler.h"
 
 using Poco::Net::ServerSocket;
 using Poco::Net::HTTPRequestHandler;
@@ -36,6 +40,7 @@ using Poco::Util::Application;
 using Poco::Util::Option;
 using Poco::Util::OptionSet;
 using Poco::Util::HelpFormatter;
+
 
 
 class HTTPTimeServer: public Poco::Util::ServerApplication {
