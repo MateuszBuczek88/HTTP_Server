@@ -22,18 +22,20 @@ void WordsIndexHandler::handleRequest(
 
     Session session("MySQL", connection_string);
     Statement select(session);
-
-    select << "SELECT count(id)  FROM polish_english",
-    into(index_count),
-    range(0 , 1);
+    std::vector<int>id_list;
+    select << "SELECT id  FROM polish_english",
+    into(id_list);
 
     std::ostream& ostr = response.send();
-    while (!select.done()) {
+    if (!select.done()) {
         select.execute();
-        ostr << "<html><head><title>HTTPTimeServer powered by POCO C++ Libraries</title>";
+        ostr << "<html><head><title>HTTPServer powered by POCO C++ Libraries</title>";
         ostr << "<meta http-equiv=\"refresh\" content=\"100\"></head>";
         ostr << "<body><p style=\"text-align: center; font-size: 48px;\">";
-        ostr << "Choose index between: 1-" << index_count;
+        ostr << "ID's list: ";
+        for (auto a : id_list) {
+            ostr  << a << ", ";
+        }
         ostr << "</p></body></html>";
     }
 }

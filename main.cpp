@@ -21,8 +21,8 @@
 #include "TimeRequestHandler.h"
 #include "HelloWorldRequestHandler.h"
 #include "RandomCatRequestHandler.h"
-#include "TimeRequestHandlerFactory.h"
-#include "MySQLRequestHandler.h"
+#include "RequestHandlerFactory.h"
+#include "WordRequestHandler.h"
 
 using Poco::Net::ServerSocket;
 using Poco::Net::HTTPRequestHandler;
@@ -42,11 +42,10 @@ using Poco::Util::OptionSet;
 using Poco::Util::HelpFormatter;
 
 
-
-class HTTPTimeServer: public Poco::Util::ServerApplication {
+class HTTPTServer: public Poco::Util::ServerApplication {
  public:
-    HTTPTimeServer(): _helpRequested(false) {}
-    ~HTTPTimeServer() {}
+    HTTPTServer(): _helpRequested(false) {}
+    ~HTTPTServer() {}
 
  protected:
     void initialize(Application& self) {
@@ -105,10 +104,10 @@ class HTTPTimeServer: public Poco::Util::ServerApplication {
                 }
             }
 
-            unsigned short port = (unsigned short) config().getInt("HTTPTimeServer.port" , 9980);
-            std::string format(config().getString("HTTPTimeServer.format", DateTimeFormat::SORTABLE_FORMAT));
-            int maxQueued  = config().getInt("HTTPTimeServer.maxQueued", 100);
-            int maxThreads = config().getInt("HTTPTimeServer.maxThreads", 16);
+            unsigned short port = (unsigned short) config().getInt("HTTPServer.port" , 9980);
+            std::string format(config().getString("HTTPServer.format", DateTimeFormat::SORTABLE_FORMAT));
+            int maxQueued  = config().getInt("HTTPServer.maxQueued", 100);
+            int maxThreads = config().getInt("HTTPServer.maxThreads", 16);
             ThreadPool::defaultPool().addCapacity(maxThreads);
 
             HTTPServerParams* pParams = new HTTPServerParams;
@@ -117,7 +116,7 @@ class HTTPTimeServer: public Poco::Util::ServerApplication {
 
             ServerSocket svs(port);
 
-            HTTPServer srv(new TimeRequestHandlerFactory(format), svs, pParams);
+            HTTPServer srv(new RequestHandlerFactory(format), svs, pParams);
 
             srv.start();
 
@@ -135,6 +134,6 @@ class HTTPTimeServer: public Poco::Util::ServerApplication {
 
 
 int main(int argc, char** argv) {
-    HTTPTimeServer app;
+    HTTPTServer app;
     return app.run(argc, argv);
 }

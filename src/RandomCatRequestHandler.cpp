@@ -17,7 +17,7 @@ void RandomCatRequestHandler::handleRequest(
     response.setContentType("text/html");
 
     std::ostream& ostr = response.send();
-    ostr << "<html><head><title>HTTPTimeServer powered by POCO C++ Libraries</title>";
+    ostr << "<html><head><title>HTTPServer powered by POCO C++ Libraries</title>";
     ostr << "<meta http-equiv=\"refresh\" content=\"2\"></head>";
     ostr << "<body><p style=\"text-align: center; font-size: 48px;\">";
     ostr << "My Work Is Done Here";

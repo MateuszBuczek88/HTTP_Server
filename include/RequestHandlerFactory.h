@@ -11,7 +11,7 @@
 #include "TimeRequestHandler.h"
 #include "HelloWorldRequestHandler.h"
 #include "RandomCatRequestHandler.h"
-#include "MySQLRequestHandler.h"
+#include "WordRequestHandler.h"
 #include "WordsIndexHandler.h"
 
 
@@ -21,11 +21,10 @@ using Poco::Net::HTTPServerRequest;
 using Poco::URI;
 
 
-class TimeRequestHandlerFactory: public HTTPRequestHandlerFactory {
+class RequestHandlerFactory: public HTTPRequestHandlerFactory {
  public:
-    explicit TimeRequestHandlerFactory(const std::string& format);
+    explicit RequestHandlerFactory(const std::string& format);
     HTTPRequestHandler* createRequestHandler(const HTTPServerRequest& request);
-    bool is_number(const std::string& s);
 
  private:
     std::string _format;

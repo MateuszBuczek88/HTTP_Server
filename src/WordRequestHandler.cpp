@@ -1,20 +1,31 @@
-#include "MySQLRequestHandler.h"
+#include "WordRequestHandler.h"
 using namespace std;
 
-struct Words {
+bool WordRequestHandler::is_number(const std::string& s) {
+    std::string::const_iterator it = s.begin();
+    while (it != s.end() && std::isdigit(*it)) ++it;
+    return !s.empty() && it == s.end();
+}
+
+struct Word {
     int id;
     std::string polish;
     std::string english;
 };
 
-int count_id = 0;
+WordRequestHandler::WordRequestHandler() {}
+WordRequestHandler::WordRequestHandler(std::vector<std::string> _uri_seg):uri_seg(_uri_seg) {}
 
-MySQLRequestHandler::MySQLRequestHandler() {}
-MySQLRequestHandler::MySQLRequestHandler(std::vector<std::string> _uri_seg):uri_seg(_uri_seg) {}
-
-void MySQLRequestHandler::handleRequest(
+void WordRequestHandler::handleRequest(
     HTTPServerRequest& request,
     HTTPServerResponse& response) {
+
+    if (!is_number(uri_seg[1])) {
+        response.setStatus(HTTPResponse::HTTPStatus::HTTP_NOT_ACCEPTABLE);
+        std::ostream& ostr = response.send();
+        ostr << "Argument should be unsigned number!";
+        return;
+    }
 
     Application& app = Application::instance();
 
@@ -23,7 +34,7 @@ void MySQLRequestHandler::handleRequest(
 
     response.setChunkedTransferEncoding(true);
     response.setContentType("text/html");
-    Words row;
+    Word row;
     Poco::Data::MySQL::Connector::registerConnector();
 
     std:: string connection_string = "host=localhost;port=3306;db=words;user=root;password=mynewpassword;compress=true;auto-reconnect=true";
@@ -37,30 +48,18 @@ void MySQLRequestHandler::handleRequest(
     into(row.english),
     range(0 , 1);
 
-    Statement select_c(session);
-    select_c << "SELECT count(id)  FROM polish_english",
-    into(count_id),
-    range(0 , 1);
-    select_c.execute();
-
-
     std::ostream& ostr = response.send();
 
-    if (count_id < (std::stoi(uri_seg[1]))) {
-        ostr << "<html><head><title>HTTPTimeServer powered by POCO C++ Libraries</title>";
+    std::size_t items_count = select.execute();
+    if (items_count == 1) {
+        ostr << "<html><head><title>HTTPServer powered by POCO C++ Libraries</title>";
         ostr << "<meta http-equiv=\"refresh\" content=\"100\"></head>";
         ostr << "<body><p style=\"text-align: center; font-size: 48px;\">";
-        ostr << "Wrong index number,choose index between: 1- " <<count_id;
+        ostr << row.id << " " <<row.polish << " " <<row.english;
         ostr << "</p></body></html>";
     } else {
-        while (!select.done()) {
-            select.execute();
-
-            ostr << "<html><head><title>HTTPTimeServer powered by POCO C++ Libraries</title>";
-            ostr << "<meta http-equiv=\"refresh\" content=\"100\"></head>";
-            ostr << "<body><p style=\"text-align: center; font-size: 48px;\">";
-            ostr << row.id << " " <<row.polish << " " <<row.english;
-            ostr << "</p></body></html>";
-        }
+        response.setStatus(HTTPResponse::HTTPStatus::HTTP_NOT_FOUND);
+        ostr << "Item not found";
+        return;
     }
 }
