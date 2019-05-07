@@ -1,7 +1,5 @@
 #include "WordsIndexHandler.h"
 
-int index_count;
-
 WordsIndexHandler::WordsIndexHandler() {}
 
 void WordsIndexHandler::handleRequest(
@@ -18,7 +16,7 @@ void WordsIndexHandler::handleRequest(
 
     Poco::Data::MySQL::Connector::registerConnector();
 
-    std:: string connection_string = "host=localhost;port=3306;db=words;user=root;password=mynewpassword;compress=true;auto-reconnect=true";
+    std:: string connection_string = "host = localhost;port = 3306;db=words;user=root;password=mynewpassword;compress=true;auto-reconnect=true";
 
     Session session("MySQL", connection_string);
     Statement select(session);
@@ -29,13 +27,11 @@ void WordsIndexHandler::handleRequest(
     std::ostream& ostr = response.send();
     if (!select.done()) {
         select.execute();
-        ostr << "<html><head><title>HTTPServer powered by POCO C++ Libraries</title>";
-        ostr << "<meta http-equiv=\"refresh\" content=\"100\"></head>";
-        ostr << "<body><p style=\"text-align: center; font-size: 48px;\">";
-        ostr << "ID's list: ";
-        for (auto a : id_list) {
-            ostr  << a << ", ";
+        ostr  << "{ \"ID\" :[ ";
+        ostr << id_list[0];
+        for (auto i = id_list.begin(); i != id_list.end()-1 ;i++) {
+            ostr << ","<< *(i+1);
         }
-        ostr << "</p></body></html>";
+        ostr  << "]}";
     }
 }

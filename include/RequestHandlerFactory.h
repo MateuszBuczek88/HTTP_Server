@@ -8,9 +8,6 @@
 #include "Poco/Net/HTTPRequestHandlerFactory.h"
 #include "Poco/Foundation.h"
 #include "Poco/URI.h"
-#include "TimeRequestHandler.h"
-#include "HelloWorldRequestHandler.h"
-#include "RandomCatRequestHandler.h"
 #include "WordRequestHandler.h"
 #include "WordsIndexHandler.h"
 

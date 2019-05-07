@@ -18,9 +18,6 @@
 #include "Poco/Data/MySQL/Connector.h"
 #include "Poco/Data/Session.h"
 #include "Poco/Data/Statement.h"
-#include "TimeRequestHandler.h"
-#include "HelloWorldRequestHandler.h"
-#include "RandomCatRequestHandler.h"
 #include "RequestHandlerFactory.h"
 #include "WordRequestHandler.h"
 

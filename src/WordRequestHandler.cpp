@@ -36,7 +36,6 @@ void WordRequestHandler::handleRequest(
     response.setContentType("text/html");
     Word row;
     Poco::Data::MySQL::Connector::registerConnector();
-
     std:: string connection_string = "host=localhost;port=3306;db=words;user=root;password=mynewpassword;compress=true;auto-reconnect=true";
 
     Session session("MySQL", connection_string);
@@ -52,11 +51,10 @@ void WordRequestHandler::handleRequest(
 
     std::size_t items_count = select.execute();
     if (items_count == 1) {
-        ostr << "<html><head><title>HTTPServer powered by POCO C++ Libraries</title>";
-        ostr << "<meta http-equiv=\"refresh\" content=\"100\"></head>";
-        ostr << "<body><p style=\"text-align: center; font-size: 48px;\">";
-        ostr << row.id << " " <<row.polish << " " <<row.english;
-        ostr << "</p></body></html>";
+        ostr << "{ \"ID\" :"<<row.id<< ", \"polish\" :"<<"\""<<row.polish<<"\""<< ",\"english\" :" <<"\""<<row.english<<"\""<<"  }";
+       // { "ID":1, "polish":"pies", "english" :"dog" }
+
+
     } else {
         response.setStatus(HTTPResponse::HTTPStatus::HTTP_NOT_FOUND);
         ostr << "Item not found";

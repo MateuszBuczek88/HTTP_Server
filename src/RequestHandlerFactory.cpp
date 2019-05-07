@@ -13,10 +13,7 @@ HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
     if (request.getMethod() == "GET") {
         if (uri_segments.size() == 0) return nullptr;  // new IndexRequestHander ();
         else if (uri_segments.size() == 1) {
-            if (uri_segments[0] == "time") return new TimeRequestHandler(_format);
-            else if (uri_segments[0] == "cat") return new RandomCatRequestHandler();
-            else if (uri_segments[0] == "hello") return new HelloWorldRequestHandler();
-            else if (uri_segments[0] == "word") return new WordsIndexHandler();
+            if (uri_segments[0] == "word") return nullptr;
             else if (uri_segments[0] == "words")return new WordsIndexHandler();
             else
                 return nullptr;

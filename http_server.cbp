@@ -42,10 +42,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/HelloWorldRequestHandler.h" />
-		<Unit filename="include/RandomCatRequestHandler.h" />
 		<Unit filename="include/RequestHandlerFactory.h" />
-		<Unit filename="include/TimeRequestHandler.h" />
 		<Unit filename="include/WordRequestHandler.h" />
 		<Unit filename="include/WordsIndexHandler.h" />
 		<Unit filename="main.cpp" />
