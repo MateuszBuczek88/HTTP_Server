@@ -10,6 +10,7 @@
 #include "Poco/URI.h"
 #include "WordRequestHandler.h"
 #include "WordsRequestHandler.h"
+#include "DatabaseConfiguration.h"
 
 
 using Poco::Net::HTTPRequestHandler;
@@ -20,11 +21,13 @@ using Poco::URI;
 
 class RequestHandlerFactory: public HTTPRequestHandlerFactory {
  public:
-    explicit RequestHandlerFactory(const std::string& format);
+    explicit RequestHandlerFactory(DatabaseConfiguration* _config);
     HTTPRequestHandler* createRequestHandler(const HTTPServerRequest& request);
+    string toConfigString();
 
  private:
-    std::string _format;
+
+    DatabaseConfiguration* config;
 };
 
 #endif  // INCLUDE_TIMEREQUESTHANDLERFACTORY_H_

@@ -1,6 +1,6 @@
 #include "WordsRequestHandler.h"
 
-WordsRequestHandler::WordsRequestHandler() {}
+WordsRequestHandler::WordsRequestHandler(std::string _connection):connection(_connection) {}
 
 std::string WordsRequestHandler::idsToJSON (const std::vector<int>&ids)
 {
@@ -30,9 +30,9 @@ void WordsRequestHandler::handleRequest(
 
     Poco::Data::MySQL::Connector::registerConnector();
 
-    std:: string connection_string = "host = localhost;port = 3306;db=words;user=root;password=mynewpassword;compress=true;auto-reconnect=true";
+   // std:: string connection_string = "host = localhost;port = 3306;db=words;user=root;password=mynewpassword";
 
-    Session session("MySQL", connection_string);
+    Session session("MySQL", connection);
     Statement select(session);
     std::vector<int>id_list;
     select << "SELECT id  FROM polish_english",

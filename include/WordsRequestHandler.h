@@ -23,12 +23,13 @@ using namespace Poco::Data;
 
 class WordsRequestHandler: public HTTPRequestHandler {
  public:
-    WordsRequestHandler();
+    WordsRequestHandler(std::string _connection);
 
     void handleRequest(
         HTTPServerRequest& request,
         HTTPServerResponse& response);
     std::string idsToJSON (const std::vector<int>&ids);
+    std::string connection;
 };
 
 #endif  // INCLUDE_WORDSREQUESTHANDLER_H_

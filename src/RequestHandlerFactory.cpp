@@ -1,7 +1,13 @@
 #include "RequestHandlerFactory.h"
 
-RequestHandlerFactory::RequestHandlerFactory(const std::string& format):
-    _format(format) {}
+RequestHandlerFactory::RequestHandlerFactory(DatabaseConfiguration* _config):config(_config){
+}
+
+string RequestHandlerFactory::toConfigString() {
+    stringstream result;
+    result << "host="<< config->host << ";" <<"port=" <<config->port << ";" <<"db="<<config->db << ";"<<"user="<<config->user << ";"<<"password="<<config->password << ";";
+    return result.str();
+}
 
 HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
     const HTTPServerRequest& request) {
@@ -14,10 +20,10 @@ HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
         if (uri_segments.size() == 0) return nullptr;  // new IndexRequestHander ();
         else if (uri_segments.size() == 1) {
             if (uri_segments[0] == "word") return nullptr;
-            else if (uri_segments[0] == "words")return new WordsRequestHandler();
+            else if (uri_segments[0] == "words")return new WordsRequestHandler(toConfigString());
             else
                 return nullptr;
 
-        } else if (uri_segments.size() == 2) return new WordRequestHandler(uri_segments);
+        } else if (uri_segments.size() == 2) return new WordRequestHandler(uri_segments,toConfigString());
     }
 }

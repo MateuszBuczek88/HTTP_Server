@@ -112,8 +112,8 @@ class HTTPTServer: public Poco::Util::ServerApplication {
             pParams->setMaxThreads(maxThreads);
 
             ServerSocket svs(port);
-
-            HTTPServer srv(new RequestHandlerFactory(format), svs, pParams);
+            auto mysqlConfiguration = DatabaseConfiguration(config());
+            HTTPServer srv(new RequestHandlerFactory(&mysqlConfiguration), svs, pParams);
 
             srv.start();
 

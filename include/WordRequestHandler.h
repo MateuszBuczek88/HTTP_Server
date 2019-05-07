@@ -33,13 +33,14 @@ using namespace Poco::Net;
 
 class WordRequestHandler: public HTTPRequestHandler {
  public:
-    explicit WordRequestHandler(const std::vector<std::string>  &_uri_seg);
+     WordRequestHandler(const std::vector<std::string>  &_uri_seg, std::string _connection);
     void handleRequest(
     HTTPServerRequest& request,
         HTTPServerResponse& response);
  private:
         std::vector< std::string>uri_seg;
         bool is_number(const std::string& s);
+        string connection;
 };
 
 #endif  // INCLUDE_MYSQLREQUESTHANDLER_H_
