@@ -49,10 +49,7 @@
 		<Unit filename="include/WordRequestHandler.h" />
 		<Unit filename="include/WordsIndexHandler.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/HelloWorldRequestHandler.cpp" />
-		<Unit filename="src/RandomCatRequestHandler.cpp" />
 		<Unit filename="src/RequestHandlerFactory.cpp" />
-		<Unit filename="src/TimeRequestHandler.cpp" />
 		<Unit filename="src/WordRequestHandler.cpp" />
 		<Unit filename="src/WordsIndexHandler.cpp" />
 		<Extensions>
