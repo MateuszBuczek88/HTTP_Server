@@ -24,7 +24,7 @@ void WordsRequestHandler::handleRequest(
     "Request from " + request.clientAddress().toString());
 
     response.setChunkedTransferEncoding(true);
-    response.setContentType("text/html");
+    response.setContentType("application/json");
 
     Poco::Data::MySQL::Connector::registerConnector();
 

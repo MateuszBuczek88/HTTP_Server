@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <iomanip>
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "Poco/Net/HTTPServerRequest.h"
 #include "Poco/Net/HTTPServerResponse.h"
@@ -12,6 +13,12 @@
 #include "Poco/Data/Session.h"
 #include "Poco/Data/Statement.h"
 #include "RequestHandlerFactory.h"
+#include "Word.h"
+#include <utility>
+#include <algorithm>
+#include <string>
+#include <vector>
+#include <cctype>
 
 using Poco::Net::HTTPRequestHandler;
 using Poco::Net::HTTPResponse;

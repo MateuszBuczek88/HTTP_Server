@@ -7,12 +7,6 @@ bool WordRequestHandler::is_number(const std::string& s) {
     return !s.empty() && it == s.end();
 }
 
-struct Word {
-    int id;
-    std::string polish;
-    std::string english;
-};
-
 WordRequestHandler::WordRequestHandler(const std::vector<std::string> &_uri_seg):uri_seg(_uri_seg) {}
 
 void WordRequestHandler::handleRequest(
@@ -32,7 +26,7 @@ void WordRequestHandler::handleRequest(
     "Request from " + request.clientAddress().toString());
 
     response.setChunkedTransferEncoding(true);
-    response.setContentType("text/html");
+    response.setContentType("application/json");
     Word row;
     Poco::Data::MySQL::Connector::registerConnector();
     std:: string connection_string = "host=localhost;port=3306;db=words;user=root;password=mynewpassword;compress=true;auto-reconnect=true";
@@ -50,9 +44,7 @@ void WordRequestHandler::handleRequest(
 
     std::size_t items_count = select.execute();
     if (items_count == 1) {
-        ostr << "{ \"ID\" :"<<row.id<< ", \"polish\" :"<<"\""<<row.polish<<"\""<< ",\"english\" :" <<"\""<<row.english<<"\""<<"  }";
-       // { "ID":1, "polish":"pies", "english" :"dog" }
-
+        ostr << row.toJSON();
 
     } else {
         response.setStatus(HTTPResponse::HTTPStatus::HTTP_NOT_FOUND);
