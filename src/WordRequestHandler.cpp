@@ -13,8 +13,7 @@ struct Word {
     std::string english;
 };
 
-WordRequestHandler::WordRequestHandler() {}
-WordRequestHandler::WordRequestHandler(std::vector<std::string> _uri_seg):uri_seg(_uri_seg) {}
+WordRequestHandler::WordRequestHandler(const std::vector<std::string> &_uri_seg):uri_seg(_uri_seg) {}
 
 void WordRequestHandler::handleRequest(
     HTTPServerRequest& request,

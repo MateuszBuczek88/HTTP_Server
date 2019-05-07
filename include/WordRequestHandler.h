@@ -26,13 +26,12 @@ using namespace Poco::Net;
 
 class WordRequestHandler: public HTTPRequestHandler {
  public:
-    WordRequestHandler();
-    explicit WordRequestHandler(std::vector<std::string>  _uri_seg);
+    explicit WordRequestHandler(const std::vector<std::string>  &_uri_seg);
     void handleRequest(
     HTTPServerRequest& request,
         HTTPServerResponse& response);
  private:
-        std::vector<std::string>uri_seg;
+        std::vector< std::string>uri_seg;
         bool is_number(const std::string& s);
 };
 
