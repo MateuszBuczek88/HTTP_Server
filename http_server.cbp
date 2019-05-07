@@ -43,12 +43,14 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/RequestHandlerFactory.h" />
+		<Unit filename="include/Word.h" />
 		<Unit filename="include/WordRequestHandler.h" />
-		<Unit filename="include/WordsIndexHandler.h" />
+		<Unit filename="include/WordsRequestHandler.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/RequestHandlerFactory.cpp" />
+		<Unit filename="src/Word.cpp" />
 		<Unit filename="src/WordRequestHandler.cpp" />
-		<Unit filename="src/WordsIndexHandler.cpp" />
+		<Unit filename="src/WordsRequestHandler.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

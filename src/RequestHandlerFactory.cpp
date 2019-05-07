@@ -14,7 +14,7 @@ HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
         if (uri_segments.size() == 0) return nullptr;  // new IndexRequestHander ();
         else if (uri_segments.size() == 1) {
             if (uri_segments[0] == "word") return nullptr;
-            else if (uri_segments[0] == "words")return new WordsIndexHandler();
+            else if (uri_segments[0] == "words")return new WordsRequestHandler();
             else
                 return nullptr;
 

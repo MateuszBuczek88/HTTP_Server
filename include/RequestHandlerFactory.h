@@ -9,7 +9,7 @@
 #include "Poco/Foundation.h"
 #include "Poco/URI.h"
 #include "WordRequestHandler.h"
-#include "WordsIndexHandler.h"
+#include "WordsRequestHandler.h"
 
 
 using Poco::Net::HTTPRequestHandler;

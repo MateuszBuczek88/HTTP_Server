@@ -1,6 +1,8 @@
-#ifndef INCLUDE_WORDSINDEXHANDLER_H_
-#define INCLUDE_WORDSINDEXHANDLER_H_
+#ifndef INCLUDE_WORDSREQUESTHANDLER_H_
+#define INCLUDE_WORDSREQUESTHANDLER_H_
 #include <iostream>
+#include <vector>
+#include <iomanip>
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "Poco/Net/HTTPServerRequest.h"
 #include "Poco/Net/HTTPServerResponse.h"
@@ -19,13 +21,14 @@ using Poco::Data::Session;
 using Poco::Data::Statement;
 using namespace Poco::Data;
 
-class WordsIndexHandler: public HTTPRequestHandler {
+class WordsRequestHandler: public HTTPRequestHandler {
  public:
-    WordsIndexHandler();
+    WordsRequestHandler();
 
     void handleRequest(
         HTTPServerRequest& request,
         HTTPServerResponse& response);
+    std::string idsToJSON (const std::vector<int>&ids);
 };
 
-#endif  // INCLUDE_WORDSINDEXHANDLER_H_
+#endif  // INCLUDE_WORDSREQUESTHANDLER_H_

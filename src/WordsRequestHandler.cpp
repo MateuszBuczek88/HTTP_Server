@@ -5,10 +5,12 @@ WordsRequestHandler::WordsRequestHandler() {}
 std::string WordsRequestHandler::idsToJSON (const std::vector<int>&ids)
 {
     std::stringstream temp;
-    temp  << "{ \"ID\" :[ ";
-    temp << ids[0];
-    for (auto i = ids.begin(); i != ids.end()-1 ;i++) {
-        temp << ","<< *(i+1);
+    temp  << "{ \"ids\" :[";
+    if (!ids.empty()){
+        temp << ids[0];
+        for (auto i = ids.begin(); i != ids.end()-1 ;i++) {
+            temp << ","<< *(i+1);
+        }
     }
     temp  << "]}";
     return temp.str();
@@ -24,7 +26,7 @@ void WordsRequestHandler::handleRequest(
     "Request from " + request.clientAddress().toString());
 
     response.setChunkedTransferEncoding(true);
-    response.setContentType("text/html");
+    response.setContentType("application/json");
 
     Poco::Data::MySQL::Connector::registerConnector();
 
