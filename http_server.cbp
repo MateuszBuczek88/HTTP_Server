@@ -20,6 +20,8 @@
 					<Add library="PocoNet" />
 					<Add library="PocoXML" />
 					<Add library="PocoFoundation" />
+					<Add library="PocoData" />
+					<Add library="PocoMySQL" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -40,15 +42,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/HelloWorldRequestHandler.h" />
-		<Unit filename="include/RandomCatRequestHandler.h" />
-		<Unit filename="include/TimeRequestHandler.h" />
-		<Unit filename="include/TimeRequestHandlerFactory.h" />
+		<Unit filename="include/RequestHandlerFactory.h" />
+		<Unit filename="include/WordRequestHandler.h" />
+		<Unit filename="include/WordsIndexHandler.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/HelloWorldRequestHandler.cpp" />
-		<Unit filename="src/RandomCatRequestHandler.cpp" />
-		<Unit filename="src/TimeRequestHandler.cpp" />
-		<Unit filename="src/TimeRequestHandlerFactory.cpp" />
+		<Unit filename="src/RequestHandlerFactory.cpp" />
+		<Unit filename="src/WordRequestHandler.cpp" />
+		<Unit filename="src/WordsIndexHandler.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
