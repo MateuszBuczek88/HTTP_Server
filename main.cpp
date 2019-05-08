@@ -102,7 +102,6 @@ class HTTPTServer: public Poco::Util::ServerApplication {
             }
 
             unsigned short port = (unsigned short) config().getInt("HTTPServer.port" , 9980);
-            std::string format(config().getString("HTTPServer.format", DateTimeFormat::SORTABLE_FORMAT));
             int maxQueued  = config().getInt("HTTPServer.maxQueued", 100);
             int maxThreads = config().getInt("HTTPServer.maxThreads", 16);
             ThreadPool::defaultPool().addCapacity(maxThreads);
@@ -112,8 +111,8 @@ class HTTPTServer: public Poco::Util::ServerApplication {
             pParams->setMaxThreads(maxThreads);
 
             ServerSocket svs(port);
-            auto mysqlConfiguration = DatabaseConfiguration(config());
-            HTTPServer srv(new RequestHandlerFactory(&mysqlConfiguration), svs, pParams);
+            DatabaseConfiguration mysqlConfiguration = DatabaseConfiguration(config());
+            HTTPServer srv(new RequestHandlerFactory(mysqlConfiguration), svs, pParams);
 
             srv.start();
 

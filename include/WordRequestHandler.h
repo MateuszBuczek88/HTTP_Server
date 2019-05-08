@@ -26,19 +26,19 @@ using Poco::Util::Application;
 using Poco::Data::MySQL::Connector;
 using Poco::Data::Session;
 using Poco::Data::Statement;
-using namespace Poco::Data;
-using namespace Poco::Net;
+using Poco::Data::into;
+using Poco::Data::range;
 
 class WordRequestHandler: public HTTPRequestHandler {
  public:
-     WordRequestHandler(const std::vector<std::string>  &_uri_seg, std::string _connection);
+    WordRequestHandler(const std::vector<std::string>  &_uri_seg, std::string _connection);
     void handleRequest(
     HTTPServerRequest& request,
         HTTPServerResponse& response);
  private:
-        std::vector< std::string>uri_seg;
+        std::vector< std::string> uri_seg;
         bool is_number(const std::string& s);
-        string connection;
+        std::string connection;
 };
 
 #endif  // INCLUDE_WORDREQUESTHANDLER_H_

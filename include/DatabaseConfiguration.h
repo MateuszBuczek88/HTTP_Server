@@ -5,17 +5,16 @@
 #include <iomanip>
 #include "Poco/Util/LayeredConfiguration.h"
 using Poco::Util::LayeredConfiguration;
-using namespace std;
-
 
 struct DatabaseConfiguration {
-    explicit DatabaseConfiguration(const LayeredConfiguration & config);
-    string host;
+ private:
+    std::string host;
     int port;
-    string db;
-    string user;
-    string password;
-
-    string toConfigString();
+    std::string db;
+    std::string user;
+    std::string password;
+ public:
+    explicit DatabaseConfiguration(const LayeredConfiguration & config);
+    std::string toConnectionString()const;
 };
 #endif  // INCLUDE_DATABASECONFIGURATION_H_

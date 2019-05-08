@@ -1,6 +1,6 @@
 #include "Word.h"
-string Word::toJSON() {
-    stringstream temp;
+std::string Word::toJSON() {
+    std::stringstream temp;
     temp << "{ \"id\" :" << id << ", \"polish\" :" << "\"" << polish << "\"" << ",\"english\" :" << "\"" << english << "\"" << "  }";
     return temp.str();
 }

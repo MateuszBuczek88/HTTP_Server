@@ -1,5 +1,4 @@
 #include "WordRequestHandler.h"
-using namespace std;
 
 bool WordRequestHandler::is_number(const std::string& s) {
     std::string::const_iterator it = s.begin();

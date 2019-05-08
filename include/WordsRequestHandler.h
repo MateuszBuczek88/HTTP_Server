@@ -12,7 +12,6 @@
 #include "Poco/Data/Session.h"
 #include "Poco/Data/Statement.h"
 
-
 using Poco::Net::HTTPRequestHandler;
 using Poco::Net::HTTPServerRequest;
 using Poco::Net::HTTPServerResponse;
@@ -20,7 +19,8 @@ using Poco::Util::Application;
 using Poco::Data::MySQL::Connector;
 using Poco::Data::Session;
 using Poco::Data::Statement;
-using namespace Poco::Data;
+using Poco::Data::into;
+using Poco::Data::range;
 
 class WordsRequestHandler: public HTTPRequestHandler {
  public:
@@ -29,6 +29,7 @@ class WordsRequestHandler: public HTTPRequestHandler {
     void handleRequest(
         HTTPServerRequest& request,
         HTTPServerResponse& response);
+ private:
     std::string idsToJSON(const std::vector<int>&ids);
     std::string connection;
 };

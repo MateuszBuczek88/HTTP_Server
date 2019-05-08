@@ -8,8 +8,8 @@ DatabaseConfiguration::DatabaseConfiguration(const LayeredConfiguration & config
     password = config.getString("MySQL.password" , "mynewpassword");
 }
 
-string DatabaseConfiguration::toConfigString() {
-    stringstream result;
+std::string DatabaseConfiguration::toConnectionString()const {
+    std::stringstream result;
     result << "host=" << host << ";" << "port=" << port << ";" << "db=" << db << ";" << "user=" << user << ";" << "password=" << password;
     return result.str();
 }

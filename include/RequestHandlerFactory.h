@@ -12,20 +12,17 @@
 #include "WordsRequestHandler.h"
 #include "DatabaseConfiguration.h"
 
-
 using Poco::Net::HTTPRequestHandler;
 using Poco::Net::HTTPRequestHandlerFactory;
 using Poco::Net::HTTPServerRequest;
 using Poco::URI;
 
-
 class RequestHandlerFactory: public HTTPRequestHandlerFactory {
  public:
-    explicit RequestHandlerFactory(DatabaseConfiguration* _config);
+    explicit RequestHandlerFactory(const DatabaseConfiguration &_config);
     HTTPRequestHandler* createRequestHandler(const HTTPServerRequest& request);
-    string toConfigString();
 
  private:
-    DatabaseConfiguration* config;
+    std::string config;
 };
 #endif  // INCLUDE_REQUESTHANDLERFACTORY_H_
