@@ -1,5 +1,5 @@
-#ifndef INCLUDE_TIMEREQUESTHANDLERFACTORY_H_
-#define INCLUDE_TIMEREQUESTHANDLERFACTORY_H_
+#ifndef INCLUDE_REQUESTHANDLERFACTORY_H_
+#define INCLUDE_REQUESTHANDLERFACTORY_H_
 #include <ctype.h>
 #include <iostream>
 #include <sstream>
@@ -26,8 +26,6 @@ class RequestHandlerFactory: public HTTPRequestHandlerFactory {
     string toConfigString();
 
  private:
-
     DatabaseConfiguration* config;
 };
-
-#endif  // INCLUDE_TIMEREQUESTHANDLERFACTORY_H_
+#endif  // INCLUDE_REQUESTHANDLERFACTORY_H_

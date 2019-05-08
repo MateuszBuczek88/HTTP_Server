@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <string>
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "Poco/Net/HTTPServerRequest.h"
 #include "Poco/Net/HTTPServerResponse.h"
@@ -23,13 +24,12 @@ using namespace Poco::Data;
 
 class WordsRequestHandler: public HTTPRequestHandler {
  public:
-    WordsRequestHandler(std::string _connection);
+    explicit WordsRequestHandler(std::string _connection);
 
     void handleRequest(
         HTTPServerRequest& request,
         HTTPServerResponse& response);
-    std::string idsToJSON (const std::vector<int>&ids);
+    std::string idsToJSON(const std::vector<int>&ids);
     std::string connection;
 };
-
 #endif  // INCLUDE_WORDSREQUESTHANDLER_H_

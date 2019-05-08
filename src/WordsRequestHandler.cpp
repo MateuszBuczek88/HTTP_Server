@@ -2,13 +2,12 @@
 
 WordsRequestHandler::WordsRequestHandler(std::string _connection):connection(_connection) {}
 
-std::string WordsRequestHandler::idsToJSON (const std::vector<int>&ids)
-{
+std::string WordsRequestHandler::idsToJSON(const std::vector<int>&ids) {
     std::stringstream temp;
     temp  << "{ \"ids\" :[";
-    if (!ids.empty()){
+    if (!ids.empty()) {
         temp << ids[0];
-        for (auto i = ids.begin(); i != ids.end()-1 ;i++) {
+        for (auto i = ids.begin() ; i != ids.end()-1 ; i++) {
             temp << ","<< *(i+1);
         }
     }
@@ -42,6 +41,5 @@ void WordsRequestHandler::handleRequest(
     if (!select.done()) {
         select.execute();
         ostr << idsToJSON(id_list);
-
     }
 }

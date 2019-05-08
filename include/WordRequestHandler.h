@@ -1,9 +1,12 @@
-#ifndef INCLUDE_MYSQLREQUESTHANDLER_H_
-#define INCLUDE_MYSQLREQUESTHANDLER_H_
+#ifndef INCLUDE_WORDREQUESTHANDLER_H_
+#define INCLUDE_WORDREQUESTHANDLER_H_
 #include <iostream>
 #include <vector>
 #include <string>
 #include <iomanip>
+#include <utility>
+#include <algorithm>
+#include <cctype>
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "Poco/Net/HTTPServerRequest.h"
 #include "Poco/Net/HTTPServerResponse.h"
@@ -14,11 +17,6 @@
 #include "Poco/Data/Statement.h"
 #include "RequestHandlerFactory.h"
 #include "Word.h"
-#include <utility>
-#include <algorithm>
-#include <string>
-#include <vector>
-#include <cctype>
 
 using Poco::Net::HTTPRequestHandler;
 using Poco::Net::HTTPResponse;
@@ -43,4 +41,4 @@ class WordRequestHandler: public HTTPRequestHandler {
         string connection;
 };
 
-#endif  // INCLUDE_MYSQLREQUESTHANDLER_H_
+#endif  // INCLUDE_WORDREQUESTHANDLER_H_

@@ -1,13 +1,6 @@
 #include "RequestHandlerFactory.h"
 
-RequestHandlerFactory::RequestHandlerFactory(DatabaseConfiguration* _config):config(_config){
-}
-
-string RequestHandlerFactory::toConfigString() {
-    stringstream result;
-    result << "host="<< config->host << ";" <<"port=" <<config->port << ";" <<"db="<<config->db << ";"<<"user="<<config->user << ";"<<"password="<<config->password;
-    return result.str();
-
+RequestHandlerFactory::RequestHandlerFactory(DatabaseConfiguration* _config):config(_config) {
 }
 
 HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
@@ -21,10 +14,10 @@ HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
         if (uri_segments.size() == 0) return nullptr;  // new IndexRequestHander ();
         else if (uri_segments.size() == 1) {
             if (uri_segments[0] == "word") return nullptr;
-            else if (uri_segments[0] == "words")return new WordsRequestHandler(toConfigString());
+            else if (uri_segments[0] == "words")return new WordsRequestHandler(config->toConfigString());
             else
                 return nullptr;
 
-        } else if (uri_segments.size() == 2) return new WordRequestHandler(uri_segments,toConfigString());
+        } else if (uri_segments.size() == 2) return new WordRequestHandler(uri_segments, config->toConfigString());
     }
 }
