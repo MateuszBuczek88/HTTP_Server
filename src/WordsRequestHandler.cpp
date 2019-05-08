@@ -30,7 +30,7 @@ void WordsRequestHandler::handleRequest(
 
     Poco::Data::MySQL::Connector::registerConnector();
 
-   // std:: string connection_string = "host = localhost;port = 3306;db=words;user=root;password=mynewpassword";
+    std:: string connection_string = "host = localhost;port = 3306;db=words;user=root;password=mynewpassword";
 
     Session session("MySQL", connection);
     Statement select(session);

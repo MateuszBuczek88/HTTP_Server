@@ -5,8 +5,9 @@ RequestHandlerFactory::RequestHandlerFactory(DatabaseConfiguration* _config):con
 
 string RequestHandlerFactory::toConfigString() {
     stringstream result;
-    result << "host="<< config->host << ";" <<"port=" <<config->port << ";" <<"db="<<config->db << ";"<<"user="<<config->user << ";"<<"password="<<config->password << ";";
+    result << "host="<< config->host << ";" <<"port=" <<config->port << ";" <<"db="<<config->db << ";"<<"user="<<config->user << ";"<<"password="<<config->password;
     return result.str();
+
 }
 
 HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
