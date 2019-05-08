@@ -6,7 +6,8 @@ bool WordRequestHandler::is_number(const std::string& s) {
     return !s.empty() && it == s.end();
 }
 
-WordRequestHandler::WordRequestHandler(const std::vector<std::string> &_uri_seg,  std::string _connection):uri_seg(_uri_seg), connection(_connection) {}
+WordRequestHandler::WordRequestHandler
+    (const std::vector<std::string> &_uri_seg,  std::string _connection):uri_seg(_uri_seg), connection(_connection) {}
 
 void WordRequestHandler::handleRequest(
     HTTPServerRequest& request,
@@ -47,6 +48,5 @@ void WordRequestHandler::handleRequest(
     } else {
         response.setStatus(HTTPResponse::HTTPStatus::HTTP_NOT_FOUND);
         ostr << "Item not found";
-        return;
     }
 }
