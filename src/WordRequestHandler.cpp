@@ -1,5 +1,4 @@
 #include "WordRequestHandler.h"
-using namespace std;
 
 bool WordRequestHandler::is_number(const std::string& s) {
     std::string::const_iterator it = s.begin();
@@ -7,7 +6,8 @@ bool WordRequestHandler::is_number(const std::string& s) {
     return !s.empty() && it == s.end();
 }
 
-WordRequestHandler::WordRequestHandler(const std::vector<std::string> &_uri_seg):uri_seg(_uri_seg) {}
+WordRequestHandler::WordRequestHandler
+    (const std::vector<std::string> &_uri_seg,  std::string _connection):uri_seg(_uri_seg), connection(_connection) {}
 
 void WordRequestHandler::handleRequest(
     HTTPServerRequest& request,
@@ -29,9 +29,8 @@ void WordRequestHandler::handleRequest(
     response.setContentType("application/json");
     Word row;
     Poco::Data::MySQL::Connector::registerConnector();
-    std:: string connection_string = "host=localhost;port=3306;db=words;user=root;password=mynewpassword;compress=true;auto-reconnect=true";
 
-    Session session("MySQL", connection_string);
+    Session session("MySQL", connection);
     Statement select(session);
 
     select << "SELECT id, polish, english FROM polish_english WHERE id="+uri_seg[1],
@@ -49,6 +48,5 @@ void WordRequestHandler::handleRequest(
     } else {
         response.setStatus(HTTPResponse::HTTPStatus::HTTP_NOT_FOUND);
         ostr << "Item not found";
-        return;
     }
 }

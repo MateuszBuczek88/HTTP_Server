@@ -1,5 +1,5 @@
-#ifndef INCLUDE_TIMEREQUESTHANDLERFACTORY_H_
-#define INCLUDE_TIMEREQUESTHANDLERFACTORY_H_
+#ifndef INCLUDE_REQUESTHANDLERFACTORY_H_
+#define INCLUDE_REQUESTHANDLERFACTORY_H_
 #include <ctype.h>
 #include <iostream>
 #include <sstream>
@@ -10,21 +10,19 @@
 #include "Poco/URI.h"
 #include "WordRequestHandler.h"
 #include "WordsRequestHandler.h"
-
+#include "DatabaseConfiguration.h"
 
 using Poco::Net::HTTPRequestHandler;
 using Poco::Net::HTTPRequestHandlerFactory;
 using Poco::Net::HTTPServerRequest;
 using Poco::URI;
 
-
 class RequestHandlerFactory: public HTTPRequestHandlerFactory {
  public:
-    explicit RequestHandlerFactory(const std::string& format);
+    explicit RequestHandlerFactory(const DatabaseConfiguration &_config);
     HTTPRequestHandler* createRequestHandler(const HTTPServerRequest& request);
 
  private:
-    std::string _format;
+    std::string config;
 };
-
-#endif  // INCLUDE_TIMEREQUESTHANDLERFACTORY_H_
+#endif  // INCLUDE_REQUESTHANDLERFACTORY_H_

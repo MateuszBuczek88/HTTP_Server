@@ -1,14 +1,13 @@
 #include "WordsRequestHandler.h"
 
-WordsRequestHandler::WordsRequestHandler() {}
+WordsRequestHandler::WordsRequestHandler(std::string _connection):connection(_connection) {}
 
-std::string WordsRequestHandler::idsToJSON (const std::vector<int>&ids)
-{
+std::string WordsRequestHandler::idsToJSON(const std::vector<int>&ids) {
     std::stringstream temp;
     temp  << "{ \"ids\" :[";
-    if (!ids.empty()){
+    if (!ids.empty()) {
         temp << ids[0];
-        for (auto i = ids.begin(); i != ids.end()-1 ;i++) {
+        for (auto i = ids.begin() ; i != ids.end()-1 ; i++) {
             temp << ","<< *(i+1);
         }
     }
@@ -30,9 +29,7 @@ void WordsRequestHandler::handleRequest(
 
     Poco::Data::MySQL::Connector::registerConnector();
 
-    std:: string connection_string = "host = localhost;port = 3306;db=words;user=root;password=mynewpassword;compress=true;auto-reconnect=true";
-
-    Session session("MySQL", connection_string);
+    Session session("MySQL", connection);
     Statement select(session);
     std::vector<int>id_list;
     select << "SELECT id  FROM polish_english",
@@ -42,6 +39,5 @@ void WordsRequestHandler::handleRequest(
     if (!select.done()) {
         select.execute();
         ostr << idsToJSON(id_list);
-
     }
 }
